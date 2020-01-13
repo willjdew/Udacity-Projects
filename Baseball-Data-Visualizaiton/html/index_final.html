@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
+  <script type="text/javascript">
+    function draw(data) {
+
+    /*
+      D3.js setup code
+    */
+
+        "use strict";
+        var margin = 75,
+            width = 1500 - margin,
+            height = 1000 - margin;
+
+        // debugger;
+
+        d3.select("body")
+          .append('h2')
+          .text("Weight vs Home Runs")
+          .append("h5")
+          .text("This graph shows a dataset which contains 1,157 baseball \
+          players and the physical traits of those players.  These traits are \
+          handedness (right, left, or both handed), height, weight, batting \
+          average and home runs.  Players' ability to hit home runs based on \
+          their weight, handedness.  The graph also shows the number of each \
+          player at each weight class to help see trends in the majority of \
+          players and the outliers of one player's home run count.")
+          .append("h5")
+          .text("(1) Heavier players have more home runs then lighter players. \
+          We see this trend in right and left handed players but not in both \
+          handed players.  \
+          (2) There seems to be a bell curve with players who bat with both \
+          hands.  There are outliers a small weight categories that seem to \
+          lift the the both handed players regression line.\
+          Conclution: If you want to hit more home runs it is better to specilize \
+          with one hand and to gain more muscle mass.")
+        var svg = d3.select("body")
+          .append("svg")
+            .attr("width", width + margin)
+            .attr("height", height + margin)
+          .append('g')
+              .attr('class','chart');
+
+    /*
+      Dimple.js Chart construction code
+    */
+
+        var myChart = new dimple.chart(svg, data);
+        var x = myChart.addCategoryAxis("x", "weight");
+        x.title = "Player's Weight (lbs)";
+        var y = myChart.addMeasureAxis("y", "HR");
+        y.title = "Average of Player's Home Runs (avg)";
+        var z = myChart.addMeasureAxis("z", "weight_counts");
+        var bubble = myChart.addSeries("handedness", dimple.plot.bubble);
+        // var trend = myChart.addTrendLine(bubble, dimple.trendlines.linear);
+        bubble.aggregate = dimple.aggregateMethod.avg;
+        // trend.aggregate = dimple.aggregateMethod.avg;
+        myChart.addLegend(100, 10, 1100, 20, "right");
+        myChart.draw();
+      };
+    </script>
+  </head>
+<body>
+  <script type="text/javascript">
+  /*
+    Use D3 (not dimple.js) to load the TSV file
+    and pass the contents of it to the draw function
+    */
+  d3.csv("new_bb_data.csv", draw);
+  </script>
+</body>
+</html>
