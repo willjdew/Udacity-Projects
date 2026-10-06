@@ -1,18 +1,34 @@
 # AI-Powered Agentic Workflow for Project Management
 
-In this repo, you will find all the files and instructions required to complete the project. You can find more information about the project inside the Udacity Classroom.
+A library of reusable AI agents, and a project management workflow built from them. Given a product spec, the workflow produces user stories, product features and engineering tasks. The pilot input is the spec for an "Email Router" product.
 
-## Getting Started
+## How it works
 
-The project needs to be completed in two phases and you will find starter code for both the phases inside the `starter` folder in this repo. 
+- **Phase 1** builds seven agent classes in `workflow_agents/base_agents.py`: Direct Prompt, Augmented Prompt, Knowledge Augmented Prompt, RAG Knowledge Prompt, Evaluation, Routing and Action Planning. Each one has its own test script.
+- **Phase 2** combines them. An Action Planning agent breaks the request into steps, and a Routing agent sends each step to a Product Manager, Program Manager or Development Engineer role. Each role is a Knowledge Augmented agent paired with an Evaluation agent that checks its answer and sends it back for correction until it passes.
 
-## Dependencies
+## Folder layout
 
-A `requirements.txt` file has been provided in this repo if you want to work on the project locally. Otherwise, the workspace provided in the Udacity classroom has been configured with all the required libraries. 
+```
+phase_1/
+├── workflow_agents/base_agents.py   # the agent library
+├── *_agent.py                       # one test script per agent
+└── outputs/                         # output of the test scripts
+phase_2/
+├── agentic_workflow.py              # the project management workflow
+├── route_check.py                   # quick check of the routing step on its own
+├── Product-Spec-Email-Router.txt    # pilot product spec
+├── workflow_agents/base_agents.py   # copy of the agent library
+└── outputs/                         # final output and earlier test runs
+docs/
+├── reflection.md                    # strengths, limitations and improvements
+├── STUDY_GUIDE.md                   # my study notes
+└── project_overview.md, phase_*_instructions.md   # Udacity's assignment
+```
 
-## Project Instructions
+## Running it
 
-You will find instructions for each of the two phases of the project in the README file inside the folder for that phase.
-
-## License
-[License](../LICENSE.md)
+1. `pip install -r requirements.txt`
+2. Create a `.env` file in this folder containing `OPENAI_API_KEY=your-key`.
+3. Run an agent test: `cd phase_1` then `python direct_prompt_agent.py`
+4. Run the workflow: `cd phase_2` then `python -X utf8 agentic_workflow.py`
