@@ -1,0 +1,230 @@
+request_id,request_date,cash_balance,inventory_value,order_recorded,response
+1,2025-04-01,45124.7,4875.3,yes,"The order is confirmed.
+- Glossy paper: 200 sheets at $0.20 each, line total $40.00
+- Cardstock: 100 sheets at $0.15 each, line total $15.00
+- Colored paper: 100 sheets at $0.10 each, line total $10.00
+Subtotal: $65.00
+Bulk discount: 0% (-$0.00) - Orders under 500 units are charged at list price.
+Total: $65.00
+Delivery date: April 1, 2025."
+2,2025-04-03,45124.7,4875.3,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 200 balloons: This item is not in our catalog.
+
+We can supply these items as a partial order, which has not been placed:
+- Poster paper: 500 units at $0.25 each, $125.00
+- Party streamers: 300 units at $0.05 each, $15.00
+Subtotal: $140.00
+Bulk discount: 5% (-$7.00). Orders of 500 to 999 units receive 5% off.
+Total: $133.00
+
+If you would like them, please send a new request for these items."
+3,2025-04-04,45124.7,4875.3,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 5000 sheets of sheets of A3 paper: This item is not in our catalog.
+
+We can supply these items as a partial order, which has not been placed:
+- A4 paper: 10,000 units at $0.05 each, $500.00
+- Standard copy paper: 250,000 units at $0.04 each, $10,000.00
+Subtotal: $10,500.00
+Bulk discount: 15% (-$1,575.00). Orders of 5,000 units or more receive 15% off.
+Total: $8,925.00
+
+If you would like them, please send a new request for these items."
+4,2025-04-05,45107.07,4888.55,yes,"The order is confirmed.
+- Cardstock: 500 units at $0.15 each, line total $75.00
+- A4 paper: 250 units at $0.05 each, line total $12.50
+
+Subtotal: $87.50
+Bulk discount: 5% (-$4.38) - Orders of 500 to 999 units receive 5% off.
+Total: $83.12
+
+Delivery date: April 5, 2025."
+5,2025-04-05,45188.57,4793.55,yes,"Your order is confirmed. 
+- Colored paper: 500 units at $0.10 each, line total $50.00
+- Cardstock: 300 units at $0.15 each, line total $45.00
+- Decorative adhesive tape (washi tape): 200 units at $0.20 each, line total $40.00
+
+Subtotal: $135.00
+Bulk discount: 10% (-$13.50), due to your order of 1,000 to 4,999 units.
+Total: $121.50
+
+Your supplies will be delivered on April 9, 2025."
+6,2025-04-06,45135.87000000001,4838.55,yes,"Your order is confirmed.
+- Construction paper: 500 sheets at $0.07 each, line total: $35.00
+- Standard copy paper: 300 sheets at $0.04 each, line total: $12.00
+- Cardstock: 200 sheets at $0.15 each, line total: $30.00
+
+Subtotal: $77.00
+Bulk discount: 10% (-$7.70) - Orders of 1,000 to 4,999 units receive 10% off.
+Total: $69.30
+
+Your supplies will be delivered by April 10, 2025."
+7,2025-04-07,45135.87000000001,4838.55,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 1000 sheets of matte A3 paper: We do not carry this item in A3 size.
+
+We can supply these items as a partial order, which has not been placed:
+- Glossy paper: 500 units at $0.20 each, $100.00
+- Large poster paper (24x36 inches): 300 units at $1.00 each, $300.00
+- Cardstock: 200 units at $0.15 each, $30.00
+Subtotal: $430.00
+Bulk discount: 10% (-$43.00). Orders of 1,000 to 4,999 units receive 10% off.
+Total: $387.00
+
+If you would like them, please send a new request for these items."
+8,2025-04-07,45135.87000000001,4838.55,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 2000 sheets of A5 colored paper: We do not carry this item in A5 size.
+
+We can supply these items as a partial order, which has not been placed:
+- Glossy paper: 500 units at $0.20 each, $100.00
+- Matte paper: 1,000 units at $0.18 each, $180.00
+- Recycled paper: 3,000 units at $0.08 each, $240.00
+Subtotal: $520.00
+Bulk discount: 10% (-$52.00). Orders of 1,000 to 4,999 units receive 10% off.
+Total: $468.00
+
+If you would like them, please send a new request for these items."
+9,2025-04-07,45135.87000000001,4838.55,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 100 sheets of A3 glossy paper: We do not carry this item in A3 size.
+- 50 packets of 100% recycled kraft paper envelopes: This item is not in our catalog.
+
+We can supply these items as a partial order, which has not been placed:
+- A4 paper: 200 units at $0.05 each, $10.00
+Subtotal: $10.00
+Bulk discount: 0% (-$0.00). Orders under 500 units are charged at list price.
+Total: $10.00
+
+If you would like them, please send a new request for these items."
+13,2025-04-08,45163.12000000001,4808.55,yes,"Your order is confirmed.
+- A4 paper: 500 units at $0.05 each, line total: $25.00
+- Cardstock: 200 units at $0.15 each, line total: $30.00
+
+Subtotal: $55.00
+Bulk Discount: 5% (-$2.75), reason: Orders of 500 to 999 units receive 5% off.
+Total: $52.25
+
+Delivery date: April 8, 2025."
+12,2025-04-08,45115.520000000004,4853.55,yes,"Your order is confirmed.
+- Cardstock: 200 units, $0.15 each, line total: $30.00
+- Standard copy paper: 500 units, $0.04 each, line total: $20.00
+- Paper napkins: 100 units, $0.02 each, line total: $2.00
+Subtotal: $52.00
+Bulk discount: 5% (-$2.60) - Orders of 500 to 999 units receive 5% off.
+Total: $49.40
+Delivery date: April 12, 2025."
+10,2025-04-08,45130.670000000006,4831.15,yes,"Your order is confirmed.
+
+- Glossy paper: 500 sheets at $0.20 each, line total $100.00
+- Cardstock: 300 sheets at $0.15 each, line total $45.00
+
+Subtotal: $145.00
+Bulk discount: 5% (-$7.25) - Orders of 500 to 999 units receive 5% off.
+Total: $137.75
+
+The delivery date is April 12, 2025."
+11,2025-04-08,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 500 sheets of A3 glossy paper: We do not carry this item in A3 size.
+
+We can supply these items as a partial order, which has not been placed:
+- Matte paper: 300 units at $0.18 each, $54.00
+Subtotal: $54.00
+Bulk discount: 0% (-$0.00). Orders under 500 units are charged at list price.
+Total: $54.00
+
+If you would like them, please send a new request for these items."
+14,2025-04-09,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 5000 sheets of A4 paper: The full quantity would not be available until 2025-04-16, after the deadline 2025-04-15.
+- 2000 sheets of poster paper in various colors: The full quantity would not be available until 2025-04-16, after the deadline 2025-04-15.
+
+We can supply these items as a partial order, which has not been placed:
+- Cardstock: 500 units at $0.15 each, $75.00
+Subtotal: $75.00
+Bulk discount: 5% (-$3.75). Orders of 500 to 999 units receive 5% off.
+Total: $71.25
+
+If you would like them, please send a new request for these items."
+15,2025-04-12,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 10,000 sheets of A4 white paper: The full quantity would not be available until 2025-04-19, after the deadline 2025-04-15.
+- 5,000 sheets of A3 colored paper (assorted colors): We do not carry this item in A3 size.
+- 500 reams of cardboard for signage: The full quantity would not be available until 2025-04-19, after the deadline 2025-04-15."
+16,2025-04-13,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 200 sheets of colorful construction paper: The full quantity would not be available until 2025-04-17, after the deadline 2025-04-15.
+
+We can supply these items as a partial order, which has not been placed:
+- A4 paper: 500 units at $0.05 each, $25.00
+- Poster paper: 100 units at $0.25 each, $25.00
+Subtotal: $50.00
+Bulk discount: 5% (-$2.50). Orders of 500 to 999 units receive 5% off.
+Total: $47.50
+
+If you would like them, please send a new request for these items."
+17,2025-04-14,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 1000 sheets of A4 white printer paper: The full quantity would not be available until 2025-04-18, after the deadline 2025-04-15.
+- 500 sheets of A3 colored paper (assorted colors): We do not carry this item in A3 size.
+- 2000 table napkins (white): The full quantity would not be available until 2025-04-21, after the deadline 2025-04-15.
+- 1000 paper cups (biodegradable): The full quantity would not be available until 2025-04-18, after the deadline 2025-04-15.
+
+We can supply these items as a partial order, which has not been placed:
+- Paper plates: 500 units at $0.10 each, $50.00
+Subtotal: $50.00
+Bulk discount: 5% (-$2.50). Orders of 500 to 999 units receive 5% off.
+Total: $47.50
+
+If you would like them, please send a new request for these items."
+18,2025-04-14,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 500 sheets of high-quality white cardstock: The full quantity would not be available until 2025-04-18, after the deadline 2025-04-15.
+- 1000 sheets of standard printing paper: The full quantity would not be available until 2025-04-18, after the deadline 2025-04-15.
+
+We can supply these items as a partial order, which has not been placed:
+- Colored paper: 200 units at $0.10 each, $20.00
+Subtotal: $20.00
+Bulk discount: 0% (-$0.00). Orders under 500 units are charged at list price.
+Total: $20.00
+
+If you would like them, please send a new request for these items."
+19,2025-04-15,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 2000 sheets of A4 glossy paper: The full quantity would not be available until 2025-04-22, after the deadline 2025-04-20.
+- 1500 sheets of A3 matte paper: We do not carry this item in A3 size.
+
+We can supply these items as a partial order, which has not been placed:
+- Cardstock: 1,000 units at $0.15 each, $150.00
+Subtotal: $150.00
+Bulk discount: 10% (-$15.00). Orders of 1,000 to 4,999 units receive 10% off.
+Total: $135.00
+
+If you would like them, please send a new request for these items."
+20,2025-04-17,45130.670000000006,4831.15,no,"Thank you for your request. We are not able to fill this order as requested, and nothing has been ordered or charged.
+
+The reason:
+- 10,000 tickets: This item is not in our catalog.
+
+We can supply these items as a partial order, which has not been placed:
+- Flyers: 5,000 units at $0.15 each, $750.00
+- Large poster paper (24x36 inches): 2,000 units at $1.00 each, $2,000.00
+Subtotal: $2,750.00
+Bulk discount: 15% (-$412.50). Orders of 5,000 units or more receive 15% off.
+Total: $2,337.50
+
+If you would like them, please send a new request for these items."

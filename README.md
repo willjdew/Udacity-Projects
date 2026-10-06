@@ -14,4 +14,8 @@ Projects I completed in Udacity programs.
 
 ## AI Agentic Nanodegree
 
-Projects coming soon. See [AI Agentic Nanodegree](AI%20Agentic%20Nanodegree).
+| Project | Description | Tools |
+|---|---|---|
+| [Agentic Workflow for Project Management](AI%20Agentic%20Nanodegree/Project-2-Agentic-Workflow-for-Project-Management) | A library of reusable AI agents (direct prompt, knowledge-augmented, RAG, evaluation, routing and action planning) combined into a workflow that turns a product spec into user stories, product features and engineering tasks. | Python, OpenAI API |
+| [UdaPlay Game Research Agent](AI%20Agentic%20Nanodegree/Project-3-UdaPlay-Game-Research-Agent) | A research agent that answers video game questions from a ChromaDB vector database, checks whether the results are good enough, and falls back to web search, saving new facts for next time. | Python, ChromaDB, Tavily, OpenAI API |
+| [Munder Difflin Multi-Agent System](AI%20Agentic%20Nanodegree/Project-4-Munder-Difflin-Multi-Agent-System) | A multi-agent system for a fictional paper company that handles inventory checks, quotes and order fulfillment from customer text requests against a SQLite database. | Python, smolagents, SQLite, pandas |

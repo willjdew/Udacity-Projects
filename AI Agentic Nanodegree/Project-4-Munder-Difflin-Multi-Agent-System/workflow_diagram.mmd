@@ -1,0 +1,76 @@
+---
+title: Munder Difflin multi-agent system - agent workflow
+---
+%% 4 agents: Orchestrator + Inventory + Quoting + Sales
+%% The request handler and the rules box are code, not agents.
+%%{init: {"flowchart": {"wrappingWidth": 560}, "themeVariables": {"fontSize": "15px"}}}%%
+flowchart LR
+    customer(["<b>CUSTOMER</b><br/>Request text + date of request"])
+
+    handler["<b>REQUEST HANDLER (code, not an agent)</b><br/>handle_customer_request and the completion check<br/>Starts a clean record for the request and runs the Orchestrator.<br/><b>Completion check:</b> a final answer is accepted only when every step<br/>that applies has been done, and a confirmation gives the recorded total<br/>and delivery date with no internal wording. If not, the Orchestrator<br/>is sent back with the exact task to do.<br/>Order recorded: sends the Orchestrator's confirmation.<br/>Order not placed: writes the reply from what the tools recorded.<br/>If the Orchestrator fails: writes the reply the same way."]
+
+    orch["<b>ORCHESTRATOR AGENT</b><br/>Reads the request and gives the workers one task at a time, in step order.<br/>Has no tools of its own. Writes the confirmation when an order is recorded.<br/><b>Decision rule:</b> an order is COMPLETE only if every requested item is sold<br/>and can be supplied by the deadline, from stock or a restock.<br/>Complete: send to Sales (step 3).<br/>Not complete: get a quote for the items that can be supplied (step 2),<br/>then answer ORDER NOT PLACED. Never send it to Sales."]
+
+    rules["<b>RULES BUILT INTO THE TOOLS</b><br/>Every transaction is dated the request date (YYYY-MM-DD).<br/>The supplier arrival date is used only for the deadline check<br/>and the delivery date given to the customer.<br/>Restock cost = catalog unit price x quantity.<br/>An order is recorded in full or not at all.<br/>Paper is sold by the sheet; 1 ream = 500 sheets.<br/>Sheets are supplied in A4 and letter size;<br/>other sizes only if the catalog name includes them.<br/>Order shortfalls are bought in the exact quantity; low-stock top-ups in lots of 500.<br/>Prices are worked out in whole cents, so the recorded sale equals the quote.<br/>Stock counts, supplier costs and cash go to the console log,<br/>not into the reports passed between agents.<br/><b>Bulk discount by total units:</b> under 500: 0%, 500 to 999: 5%,<br/>1,000 to 4,999: 10%, 5,000 and up: 15%."]
+
+    subgraph SAL["Sales agent and its tools"]
+        sal["<b>SALES AGENT</b><br/>Records orders and buys stock by passing each task to the right tool.<br/>The only agent that writes to the database."]
+        t_fulfill[["<b>fulfill_order</b><br/>Purpose: record the whole order or nothing.<br/>Records only an order the availability check found complete, with the same<br/>items, quantities and dates, and only once. Prices it again in code and<br/>re-checks stock, the supplier date against the deadline, and cash.<br/>Buys any shortfall first ('stock_orders'), then records each sale ('sales')<br/>Helpers: get_stock_level, get_supplier_delivery_date,<br/>get_cash_balance, create_transaction<br/>In: order lines (item, quantity), request date, deadline<br/>Out: sales report: recorded, with the total and delivery date,<br/>or refused with the reason"]]
+        t_buy[["<b>buy_restock</b><br/>Purpose: top up items flagged below minimum, cheapest first while cash lasts.<br/>Repeats the minimum-stock check: never buys an item that is not low,<br/>or more than the recommended top-up<br/>Helpers: get_all_inventory, get_cash_balance,<br/>create_transaction ('stock_orders'), get_supplier_delivery_date<br/>In: items + top-up quantities, request date<br/>Out: restock report: each item bought, or not bought with the reason"]]
+        t_fin[["<b>financial_snapshot</b><br/>Purpose: internal financial summary for a date, given on request.<br/>Not one of the per-order steps; never shown to the customer<br/>Helper: generate_financial_report<br/>In: date / Out: cash, inventory value, total assets, top sellers"]]
+        sal <--> t_fulfill
+        sal <--> t_buy
+        sal <--> t_fin
+    end
+
+    subgraph QUO["Quoting agent and its tools"]
+        quo["<b>QUOTING AGENT</b><br/>Prices the items that can be supplied with the fixed discount tiers.<br/>Hands back the quote unchanged, plus an internal history note.<br/>Does not write the customer reply."]
+        t_hist[["<b>find_similar_quotes</b><br/>Purpose: past quotes for similar jobs, as internal background<br/>for the discount explanation<br/>Helper: search_quote_history<br/>In: one to three search words (event, item)<br/>Out: history note (how many similar quotes, how many mention a discount)<br/>and excerpts of the past quotes"]]
+        t_calc[["<b>calculate_quote</b><br/>Purpose: line totals and the bulk-discount tier, set by total units ordered<br/>Helper: none (pure calculation on the starter's paper_supplies price list)<br/>In: items, quantities<br/>Out: quote: itemized lines, subtotal, discount and reason,<br/>units to next tier, total"]]
+        quo <--> t_hist
+        quo <--> t_calc
+    end
+
+    subgraph INV["Inventory agent and its tools"]
+        inv["<b>INVENTORY AGENT</b><br/>Matches the customer's wording to exact catalog items and<br/>fills in one order line per requested item.<br/>Reports what can be supplied and by when, and which items are low.<br/>Never quotes prices or spends money."]
+        t_all[["<b>list_catalog_stock</b><br/>Purpose: every item we sell with units on hand,<br/>so anything else is 'not sold'<br/>Helper: get_all_inventory (+ the paper_supplies catalog list)<br/>In: request date / Out: all catalog items, units on hand"]]
+        t_avail[["<b>check_order_availability</b><br/>Purpose: check a whole order in one call and write the availability report.<br/>Code applies every rule: confirms the catalog name, reams to sheets,<br/>items and sizes we do not sell, shortfall, supplier restock date,<br/>order complete yes or no. The result is kept for the completion check<br/>and for fulfill_order<br/>Helpers: get_stock_level, get_supplier_delivery_date<br/>In: one line per item (customer wording, catalog name, quantity, unit, size),<br/>request date, deadline<br/>Out: availability report with a verdict and reason for every item,<br/>and no stock counts"]]
+        t_min[["<b>check_min_stock</b><br/>Purpose: flag items at or below their minimum stock level<br/>Helper: get_all_inventory (+ min_stock_level from the inventory table)<br/>In: request date / Out: low items with top-up quantities (lots of 500)"]]
+        inv <--> t_all
+        inv <--> t_avail
+        inv <--> t_min
+    end
+
+    reply_no(["<b>FINAL REPLY: ORDER NOT PLACED</b><br/>Written in code. A plain reason for each item that cannot be supplied:<br/>not in the catalog, size not carried, or cannot arrive by the deadline;<br/>or the reason Sales gave, such as not enough cash for the restock.<br/>Offers the items that can be supplied as a priced partial order<br/>and invites a new request. Nothing is recorded."])
+
+    reply_ok(["<b>FINAL REPLY: ORDER CONFIRMED</b><br/>Written by the Orchestrator, checked in code.<br/>Itemized prices, discount applied and why, total,<br/>delivery date"])
+
+    db[("<b>SQLite database</b><br/>transactions, inventory, quotes, quote_requests")]
+
+    customer -- "Request + date" --> handler
+    handler <-- "out: request text<br/>STEP 6 - back: final answer, a confirmation or ORDER NOT PLACED.<br/>Sent back if a step or a required detail is missing" --> orch
+    handler -- "Order not placed: after step 2 if not complete,<br/>or after step 3 if Sales refused" ---> reply_no
+    orch <-- "STEP 1 - always<br/>out: the customer's request, word for word<br/>back: availability report, per item: catalog item, quantity in single units,<br/>available-from date, can supply by deadline yes or no, reason;<br/>and whether the order is complete" --> inv
+    orch <-- "STEP 4 - ALWAYS AFTER A RECORDED SALE<br/>out: request date<br/>back: low-stock items + top-up quantities, or none" --> inv
+    orch <-- "STEP 2 - unless no item can be supplied<br/>out: items that can be supplied + quantities,<br/>event named in the request, request date<br/>back: quote: itemized prices, discount tier and reason, total" --> quo
+    orch <-- "STEP 3 - ONLY IF the order is complete<br/>out: every item + quantity, request date, deadline<br/>back: sale recorded, with the total and delivery date,<br/>or refused with the reason" --> sal
+    orch <-- "STEP 5 - ONLY IF step 4 listed low items<br/>out: top-up list + request date<br/>back: top-ups bought, or not bought" --> sal
+    handler -- "Order recorded: after step 5" ---> reply_ok
+    orch ~~~ rules
+
+    INV -. "reads" ..-> db
+    QUO -. "reads" ..-> db
+    SAL -. "reads and writes" ..-> db
+
+    classDef agent fill:#e8f0fe,stroke:#3b5bdb,stroke-width:2px,color:#111;
+    classDef tool fill:#fff8e1,stroke:#b7791f,color:#111;
+    classDef io fill:#e6f4ea,stroke:#2f855a,color:#111;
+    classDef decline fill:#fde8e8,stroke:#c53030,color:#111;
+    classDef note fill:#f3f4f6,stroke:#6b7280,stroke-dasharray: 4 3,color:#111;
+    classDef code fill:#f3f4f6,stroke:#374151,stroke-width:2px,color:#111;
+    class orch,inv,quo,sal agent;
+    class t_all,t_avail,t_min,t_hist,t_calc,t_fulfill,t_buy,t_fin tool;
+    class customer,reply_ok io;
+    class reply_no decline;
+    class rules note;
+    class handler code;

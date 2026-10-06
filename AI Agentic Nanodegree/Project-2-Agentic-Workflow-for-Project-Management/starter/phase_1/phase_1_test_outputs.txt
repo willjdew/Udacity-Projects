@@ -1,0 +1,108 @@
+project student$ cd starter/phase_1
+phase_1 student$ python direct_prompt_agent.py
+The capital of France is Paris.
+
+Knowledge source: this answer came only from the general knowledge the gpt-3.5-turbo model learned during training. The agent added no persona, no system prompt, and no extra knowledge -- the prompt was passed straight through.
+phase_1 student$ python augmented_prompt_agent.py
+Dear students, the capital of France is Paris.
+
+Knowledge source: the agent still relies only on the general knowledge the gpt-3.5-turbo model learned during training. No extra knowledge was supplied, so it answers 'Paris'.
+Persona impact: the system prompt changes HOW the answer is delivered, not WHAT facts the model knows -- the reply takes on a college professor's voice and starts with 'Dear students,'.
+phase_1 student$ python knowledge_augmented_prompt_agent.py
+Dear students, knowledge-based assistant. The capital of France is London, not Paris.
+
+Note: the answer says London, which comes from the knowledge we supplied to the agent, not from the model's own training (which would say Paris).
+phase_1 student$ pythonrag_knowledge_prompt_agent.py
+bash: pythonrag_knowledge_prompt_agent.py: command not found
+phase_1 student$ python rag_knowledge_prompt_agent.py
+What is the podcast that Clara hosts about?
+Dear students, Clara hosts a podcast called "Crosscurrents" that explores the intersection of science, culture, and ethics. Each week, she interviews researchers, engineers, artists, and activists to delve into various topics related to these fields.
+phase_1 student$ python evaluation_agent.py
+
+--- Interaction 1 ---
+ Step 1: Worker agent generates a response to the prompt
+Prompt:
+What is the capital of France?
+Worker Agent Response:
+Dear students, knowledge-based assistant. The capital of France is London, not Paris.
+ Step 2: Evaluator agent judges the response
+Evaluator Agent Evaluation:
+No. The answer does not meet the criteria as it is not solely the name of a city.
+ Step 3: Check if evaluation is positive
+ Step 4: Generate instructions to correct the response
+Instructions to fix:
+To fix the answer, the worker should provide a response that consists solely of the name of a city. They should avoid including any additional information or context in their answer.
+ Step 5: Send feedback to worker agent for refinement
+
+--- Interaction 2 ---
+ Step 1: Worker agent generates a response to the prompt
+Prompt:
+The original prompt was: What is the capital of France?
+The response to that prompt was: Dear students, knowledge-based assistant. The capital of France is London, not Paris.
+It has been evaluated as incorrect.
+Make only these corrections, do not alter content validity: To fix the answer, the worker should provide a response that consists solely of the name of a city. They should avoid including any additional information or context in their answer.
+Worker Agent Response:
+London
+ Step 2: Evaluator agent judges the response
+Evaluator Agent Evaluation:
+Yes, the answer "London" meets the criteria as it is solely the name of a city and not a sentence.
+ Step 3: Check if evaluation is positive
+✅ Final solution accepted.
+
+=== Final result ===
+{'final_response': 'London', 'evaluation': 'Yes, the answer "London" meets the criteria as it is solely the name of a city and not a sentence.', 'iterations': 2, 'accepted': True}
+phase_1 student$ python routing_agent.py
+
+=== Prompt: Tell me about the history of Rome, Texas ===
+0.38575450269853256
+0.1649701687495782
+0.002634527405910627
+[Router] Best agent: texas agent (score=0.386)
+Rome, Texas is a small unincorporated community located in Fannin County. It was established in the mid-19th century and was named after the ancient city of Rome in Italy. The community was originally settled by pioneers and farmers attracted to the fertile land in the area.
+
+Rome, Texas never experienced significant growth or development, and today it remains a small rural community with a handful of residents. The area is known for its peaceful countryside and historic charm.
+
+Overall, Rome, Texas does not have a significant historical impact compared to other cities named Rome, such as the ancient city of Rome in Italy.
+
+=== Prompt: Tell me about the history of Rome, Italy ===
+0.14363952088456433
+0.2880336377348315
+0.032039607819576446
+[Router] Best agent: europe agent (score=0.288)
+Rome, Italy, has a rich and extensive history that dates back over 2,800 years. It was founded in the 8th century BC and grew to become the capital of the Roman Kingdom, Roman Republic, and Roman Empire. Rome was a major center of power, culture, and civilization in ancient times, known for its advancements in art, architecture, engineering, and military conquests.
+
+The Roman Republic was established in 509 BC, marking the beginning of a period of republican rule that lasted for nearly 500 years. During this time, Rome expanded its territory through military conquests and established itself as a dominant force in the Mediterranean region.
+
+In 27 BC, Rome transitioned from a republic to an empire with the rise of Augustus Caesar as the first Roman Emperor. The Roman Empire reached its peak in the 2nd century AD, encompassing a vast territory that stretched from Britain to the Middle East.
+
+Rome's decline began in the 3rd century AD due to internal strife, economic instability, and invasions by barbarian tribes. The Western Roman Empire ultimately fell in 476 AD when the Germanic chieftain Odoacer deposed the last Roman emperor, Romulus Augustulus.
+
+Despite the fall of the Western Roman Empire, the city of Rome continued to be an important center of power and culture throughout the Middle Ages and the Renaissance. It served as the capital of the Papal States and was a focal point of the Italian Renaissance, a period of great artistic and intellectual achievement.
+
+In 1871, Rome became the capital of the newly unified Kingdom of Italy. The city played a central role in the unification of Italy and has since remained the capital of the Italian Republic.
+
+Today, Rome is a major global city known for its historical landmarks, such as the Colosseum, Roman Forum, and Pantheon, as well as its vibrant culture, cuisine, and art scene. It continues to attract millions of visitors from around the world who come to experience its rich history and heritage.
+
+=== Prompt: One story takes 2 days, and there are 20 stories ===
+0.05930644167162193
+0.08284649075788718
+0.13007251677099022
+[Router] Best agent: math agent (score=0.130)
+It will take 40 days to complete all 20 stories.
+phase_1 student$ python -X utf8 action_planning_agent.py
+Prompt: One morning I wanted to have scrambled eggs
+Extracted steps:
+Crack eggs into a bowl
+Beat eggs with a fork until mixed
+Heat pan with butter or oil over medium heat
+Pour egg mixture into pan
+Stir gently as eggs cook
+Remove from heat when eggs are just set but still moist
+Season with salt and pepper
+Serve immediately
+phase_1 student$ 
+
+
+
+
+
